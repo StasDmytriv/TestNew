@@ -101,9 +101,7 @@ using System.Text;
 //    new Giraffe{Name="Giraffe"}
 //};
 
-//Zoo zoo = new Zoo { Animals = animal };
-//zoo.Say();
-//zoo.Food();
+
 
 //Auditory auditory = new Auditory();
 //foreach (Student student in auditory)
