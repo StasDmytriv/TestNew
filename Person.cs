@@ -1,25 +1,44 @@
-﻿namespace ConsoleApp2;
+﻿using ConsoleApp1.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-[Serializable]
-public class Person
+namespace ConsoleApp1;
+
+public class Person : IPerson
 {
-    [NonSerialized]
-    private int id;
+    public string name;
+    public int age;    
 
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
-
-    public int Age { get; set; }
-
-
-    public Person(int id)
+    public string Name
     {
-        this.id = id;
+        get { return name; } 
+        set
+        {
+            if (!string.IsNullOrEmpty(value))
+                name = value;
+            else
+                name = "default";
+        }
     }
 
-    public override string ToString()
+    public int Age
     {
-        return $"{id}\t {FirstName}\t {LastName}\t {Age}"; 
+        get { return age; }
+        set
+        {
+            if (age>=0)
+                age = value;
+            else
+                age=int.MinValue;
+        }
+    }
+
+   
+    public Person(string name,int age)
+    {
+       
     }
 }

@@ -1,626 +1,364 @@
-﻿using ConsoleApp2;
+﻿using ConsoleApp1;
+using ConsoleApp1.Interface;
 using System.Collections;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Formatters.Soap;
-using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Text.Json;
 using System.Text;
 
-//Calculator calculator = new Calculator();
+//Employee emp = new Employee("John", "Nate", 12000);
 
-//CalcDelegate<double> calcDelegate = new CalcDelegate<double>(calculator.Mult);
-//calcDelegate = Calculator.SubDouble; //new
-//calcDelegate += calculator.AddDouble;
-//calcDelegate += Calculator.Div;
-
-//foreach (CalcDelegate<double> i in calcDelegate.GetInvocationList())
+//Employee[] empl = new Employee[]
 //{
-//    Console.WriteLine(i(2,3));
-//}
-
-//VoidTestDelegate testDelegate = Calculator.StaticVoidTest;
-
-//Console.WriteLine(calcDelegate(5, 5));
-//testDelegate("asd", 3);
-
-//VoidStringDelegate voidStringDelegate = Calculator.StaticStringTest;
-//VoidBoolDelegate booleanDelegate = Calculator.StaticBoolTest;
-//GenericDelegate<int> genericDelegate = Calculator.StaticGenericTest;
-
-//Action<string, int, double> action = Calculator.TestAction1;
-//action += Calculator.TestAction2;
-
-//action("3", 4, 5.6);
-
-
-//Func<string, int, double, string> func = Calculator.TestFunc;
-//Console.WriteLine(func("a",1,2.5));
-
-//Predicate<int> predicate = Calculator.TestPredicate;
-//Console.WriteLine(predicate(12));
-//Console.WriteLine(predicate(-12));
-
-//Action<string, int> action = Calculator.Action1;
-//action += Calculator.Action2;
-//action += Calculator.Action3;
-
-//foreach (Action<string, int> i in action.GetInvocationList())
-//{
-//    i("a", 3);
-//}
-
-//Func<int, int, int, string> func = Calculator.Func1;
-//func += Calculator.Func2;
-//func += Calculator.Func3;
-
-//foreach (Func<int, int, int, string> i in func.GetInvocationList())
-//{
-//    Console.WriteLine(i(1, 2, 5));
-//}
-
-//Predicate<bool> predicate = Calculator.Predicate1;
-//predicate += Calculator.Predicate2;
-//predicate += Calculator.Predicate3;
-//predicate += delegate (bool a) { return !a; };
-//predicate += (bool a) => { return !a; };
-
-//foreach (Predicate<bool> i in predicate.GetInvocationList())
-//{
-//    Console.WriteLine(i(true));
-//}
-
-
-//List<Student> students = new List<Student>
-//{
-//    new Student{Id=1,Name="Name1"},
-//    new Student{Id=2,Name="Name2"},
-//    new Student{Id=3,Name="Name3"},
-//    new Student{Id=4,Name="Name4"},
-//    new Student{Id=5,Name="Name5"},
+//    emp,
+//    new Manager("manager","m",15000,"IBM"),
+//    new Scientist("scientist","s",20000,"left"),
+//    new Mentor("mentor","m",30000,"junior")
 //};
 
-//students.ForEach(delegate (Student s)
+//foreach (var item in empl)
 //{
-//    Console.WriteLine(s);
-//});
+//    item.Print();
+//}
 
-//ArrayList Array = new ArrayList();
-
-//students.ForEach(s =>
+//Point point = new Point
 //{
-//    Array.Add(new
-//    {
-//        Name = s.Name,
-//        Age = s.Age
-//    });
-//});
-
-
-//var str = new
-//{
-//    Name = students[0].Name,
-//    Age = students[0].Age
+//    X = 12,
+//    Y = 23
 //};
 
-//Console.WriteLine(str);
-
-//Teacher teacher = new Teacher();
-//foreach (Student student in students)
+//Point point1 = new Point
 //{
-//    teacher.examEvent += student.ExamStudent;
-//}
-//teacher.ExamTeacher("Task");
-
-//teacher.examEvent += delegate (string task)
-//{
-//    Console.WriteLine(task);
-//};
-//teacher.ExamTeacher("Task1");
-
-//string str1 = "saasd.asd,asdsad asd";
-//int count = str1.NumberWords();
-//Console.WriteLine(count);
-
-//List<Sender> senders = new List<Sender>
-//{
-//    new Sender{Title="Title1"},
-//    new Sender{Title="Title2"},
-//    new Sender{Title="Title3"},
-//    new Sender{Title="Title4"}
-//};
-
-//Email email = new Email();
-//foreach (Sender sender in senders)
-//{
-//    email.GetMail += sender.GetMail;
-//}
-//email.Send("IT");
-
-
-//int[] arrayList = { 1, 2, 3, 4, 10, 8, 7, 6, 9, 5};
-
-//IEnumerable<int> query = from i in arrayList
-//                  where i % 2 == 0
-//                  select i;
-
-//arrayList.Where(a => a % 2 == 0).Select(a => a);
-
-//foreach (var i in query)
-//{
-//    Console.Write($"{i}\t");
-//}
-
-//IEnumerable<int> query1 = from i in arrayList
-//                         where i % 2 == 0
-//                         orderby i ascending
-//                         select i;
-
-//Console.WriteLine();
-
-//foreach (var i in query1)
-//{
-//    Console.Write($"{i}\t");
-//}
-
-//arrayList.OrderBy(i => i).Where(a => a % 2 == 0).Select(a => a);
-
-//IEnumerable<Student> students = new List<Student>
-//{
-//    new Student{Id=1,Name="Name1"},
-//    new Student{Id=2,Name="Name2"},
-//    new Student{Id=3,Name="Name3"},
-//    new Student{Id=4,Name="Name4"},
-//    new Student{Id=5,Name="Name5"}
+//    X = 56,
+//    Y = 7
 //};
 
 //Console.WriteLine();
+//Console.WriteLine(point++);
+//Console.WriteLine(++point);
 
-//students.OrderBy(s => s.Id).Where(s => s.Id >= 3).Select(s => s.Name);
+//Console.WriteLine(point--);
+//Console.WriteLine(--point);
 
-//string[] s = { "sada sd", "sa d asd sadasff", "sad" };
-
-//IEnumerable<string> query3 = from i in s
-//                          let words = i.Split()
-//                          from w in words
-//                          where w.Count() > 3
-//                          select w;
-
-//foreach (var i in query3)
-//{
-//    Console.Write($"{i}" + "\t");
-//}
-
-//var avarage = arrayList.Average();
-
-//var studentsIdAverage = students.Select(students => students.Id).Average();
-
-//double[] arrayList = { 1.2, 2.3, 3.5, 4.7, 10.1, 8.2, 7.3, 6.4, 9.5, 5.6};
-
-//var sorted = arrayList.OrderBy(a => a);
-//foreach (var i in sorted)
-//    Console.Write($"{i}\t");
+//Console.WriteLine(-point);
+//Console.WriteLine(+point);
 
 //Console.WriteLine();
-//var BiggerAvg = arrayList.Where(a => a > arrayList.Average());
-//foreach (var i in BiggerAvg)
-//    Console.Write($"{i}\t");
+//point += point1;
+//Console.WriteLine(point);
+//point -= point1;
+//Console.WriteLine(point);
+//point *= point1;
+//Console.WriteLine(point);
+//point /= point1;
+//Console.WriteLine(point);
 
+
+//Drob d1 = new Drob(1, 2);
+//Drob d2 = new Drob(3, 4);
+//Console.WriteLine(d1 + d2);
 //Console.WriteLine();
-//var nepar = arrayList.Where(a => a % 2 != 0);
-//foreach(var i in nepar)
-//    Console.Write($"{i}\t");
+//Console.WriteLine(d1 - d2);
+//Console.WriteLine();
+//Console.WriteLine(d1 * d2);
+//Console.WriteLine();
+//Console.WriteLine(d1 / d2);
 
-//List<Car> cars = new List<Car>
+
+//Drob f = new Drob(3, 4);
+//int a = 10;
+//Drob f1 = f * a;
+//Console.WriteLine(f1);  
+//Drob f2 = a * f;
+//Console.WriteLine(f2);
+//double d = 1.5;
+//Drob f3 = f + d;
+//Console.WriteLine(f3);
+
+
+//laptop[] laptops = new laptop[]
 //{
-//    new Car{Number = "123",Model="A",Year = 2000},
-//    new Car{Number = "456",Model="B",Year = 2010},
-//    new Car{Number = "789",Model="C",Year = 2020},
-//    new Car{Number = "111",Model="C",Year = 2000},
+//    new laptop{Name = "Apple",Price=45000},
+//    new laptop{Name = "Asus",Price=52000},
+//    new laptop{Name = "Dell",Price=23000},
+//    new laptop{Name = "Lenovo",Price=20000},
 //};
 
-//var SameYear = cars.Where(a => a.Year == 2000);
-//var Model = cars.Where(a => a.Model.Contains("A") || a.Model.Contains("B"));
-//var Number = cars.Select(a => a.Number);
-//var NumAndModel = cars.Select(a => new {Number = a.Number,Model = a.Model});
+//Shop shop = new Shop(laptops);
+//Console.WriteLine(shop[2]);
+//shop[2] = new laptop { Name = "Acer", Price = 27000 };
+//Console.WriteLine(shop[2]);
 
+//int[,] arr = new int[3, 4];
+//Shop shop1 = new Shop(arr);
 
-//string emailPattern = @"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$";
+//Person person = new Person("one","two","three","four","five");
+//person.Name = "Test";
+//Console.WriteLine(person.Name);
+//Console.WriteLine(person[4]);
 
-//Regex regex = new Regex(emailPattern);
-//string email = Console.ReadLine();
-
-//Console.WriteLine(regex.IsMatch(email)? "Email is correct" : "Email is incorrect");
-
-
-//-------------------------------Binary Serializable------------------//
-
-//Person person = new Person(123) { FirstName = "first", LastName = "last", Age = 12 };
-//BinaryFormatter formatter = new BinaryFormatter();
-
-//using (Stream stream = File.Create("test.bin"))
+//IAnimal[] animal = new IAnimal[]
 //{
-//    formatter.Serialize(stream, person);
-//}
-
-//Person p = null;
-
-//using (Stream stream = File.OpenRead("test.bin"))
-//{
-//    p = (Person)formatter.Deserialize(stream);
-//}
-
-//Console.WriteLine(p);
-
-////-------------------------------Soap Serializable------------------//
-
-//SoapFormatter soapFormatter = new SoapFormatter();
-
-//using (Stream stream = File.Create("test.soap"))
-//{
-//    soapFormatter.Serialize(stream, person);
-//}
-
-//p = null;
-
-//using (Stream stream = File.OpenRead("test.soap"))
-//{
-//    p = (Person)soapFormatter.Deserialize(stream);
-//}
-
-//Animal animal = new Animal(123) { Name = "dog", Age = 5, Food = new List<string>{ "meat", "bones" } };
-//BinaryFormatter formatter = new BinaryFormatter();
-
-//using (Stream stream = File.Create("animal.bin"))
-//{
-//    formatter.Serialize(stream, animal);
-//}
-
-//Animal a = null;
-
-//using (Stream stream = File.OpenRead("animal.bin"))
-//{
-//    a = (Animal)formatter.Deserialize(stream);
-//}
-
-//Console.WriteLine(a);
-
-//SoapFormatter soapFormatter = new SoapFormatter();
-
-//using (Stream stream = File.Create("animal.soap"))
-//{
-//    soapFormatter.Serialize(stream, animal);
-//}
-
-//a = null;
-
-//using (Stream stream = File.OpenRead("animal.soap"))
-//{
-//    a = (Animal)soapFormatter.Deserialize(stream);
-//}
-
-//Student1 student1 = new Student1(123, "student", 20, "UKU");
-//XmlSerializer xmlSerializer = new XmlSerializer(typeof(Student1));
-
-//using (Stream stream = File.Create("test.xml"))
-//{
-//    xmlSerializer.Serialize(stream, student1);
-//}
-
-//using (XmlWriter writer = XmlWriter.Create("test.xml", new XmlWriterSettings { Indent = true }))
-//{
-//    xmlSerializer.Serialize(writer, student1);
-//}
-
-//Student1 s = null;
-
-//using (Stream stream = File.OpenRead("test.xml"))
-//{
-//    s = (Student1)xmlSerializer.Deserialize(stream);
-//}
-
-//Console.WriteLine(s);
-
-//List<Student1> students = new List<Student1>
-//{
-//    new Student1(123, "student1", 20, "UKU"),
-//    new Student1(456, "student2", 22, "UKU"),
-//    new Student1(789, "student3", 21, "UKU"),
-//    new Student1(010, "student4", 23, "UKU")
+//    new Lion{Name="Lion"},
+//    new Snake{Name="Snake"},
+//    new Giraffe{Name="Giraffe"}
 //};
 
-//XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Student1>));
+//Zoo zoo = new Zoo { Animals = animal };
+//zoo.Say();
+//zoo.Food();
 
-//using (XmlWriter writer = XmlWriter.Create("ListStudents.xml", new XmlWriterSettings { Indent = true }))
+//Auditory auditory = new Auditory();
+//foreach (Student student in auditory)
 //{
-//    xmlSerializer.Serialize(writer, students);
+//    Console.WriteLine(student);
 //}
 
-//List<Student1> s = null;
+//auditory.Sort();
+//Console.WriteLine();
 
-//using (Stream stream = File.OpenRead("ListStudents.xml"))
+//foreach (Student student in auditory)
 //{
-//    s = (List<Student1>)xmlSerializer.Deserialize(stream) as List<Student1>;
+//    Console.WriteLine(student);
 //}
 
-//foreach (var i in students)
-//{
-//    Console.WriteLine(i);
-//}
+//Exception
+//MyException exception = new MyException();
+//Console.WriteLine(exception.Message);
 
-
-//List<Car1> cars = new List<Car1>
-//{
-//    new Car1(1,2010,"a",Mark.Audi),
-//    new Car1(2,2011,"b",Mark.Mercedes),
-//    new Car1(3,2012,"c",Mark.Bmw),
-//    new Car1(4,2013,"d",Mark.Ford)
-//};
-
-//XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Car1>));
-
-//using (XmlWriter writer = XmlWriter.Create("ListCars.xml", new XmlWriterSettings { Indent = true }))
-//{
-//    xmlSerializer.Serialize(writer, cars);
-//}
-
-//List<Car1> s = null;
-
-//using (Stream stream = File.OpenRead("ListCars.xml"))
-//{
-//    s = (List<Car1>)xmlSerializer.Deserialize(stream);
-//}
-
-//foreach (var i in cars)
-//{
-//    Console.WriteLine(i);
-//}
-
-//string jsonString = JsonSerializer.Serialize<List<Car1>>(cars,new JsonSerializerOptions { WriteIndented = true});
-//Console.WriteLine(jsonString);
-
-//using (Stream stream = File.Create("test.json")) { }
-//    File.WriteAllText("test.json", jsonString);
-
-//Console.WriteLine(File.ReadAllText("test.json"));
-
-//List<Car1> cars1 = JsonSerializer.Deserialize<List<Car1>>(jsonString);
-//Console.WriteLine(string.Join(",",cars1));
-
-
-//XmlTextWriter writer = null;
+//MyException exception1 = new MyException("New exception");
+//Console.WriteLine(exception.Message);
 
 //try
 //{
-//    writer = new XmlTextWriter("Cars.xml",Encoding.Unicode);
-//    writer.Formatting = Formatting.Indented;
-
-//    writer.WriteStartDocument();
-//    writer.WriteStartElement("Cars");
-
-//    writer.WriteStartElement("Car");
-//    writer.WriteAttributeString("Image","test.jpeg");
-
-//    writer.WriteElementString("Manufaturer", "BMW");
-//    writer.WriteElementString("Model", "X5");
-//    writer.WriteElementString("Year", "2018");
-//    writer.WriteElementString("Color", "Black");
-//    writer.WriteElementString("Speed", "220");
-
-//    writer.WriteEndElement();
-
-//    writer.WriteEndElement();
-//    writer.WriteEndDocument();
+//	new Exception();
+//    Console.WriteLine("try");
 //}
-//catch
+//catch (Exception)
 //{
-
+//    Console.WriteLine("catch");
 //}
 //finally
 //{
-//    if (writer != null) 
+//    Console.WriteLine("finally");
+//}
+//Console.WriteLine("end");
+
+
+//ArrayList arraylist = new ArrayList();
+//Console.WriteLine(arraylist.Capacity);
+//arraylist.Add(1);
+//arraylist.Add("asd");
+//Console.WriteLine(arraylist.Capacity);
+//Console.WriteLine(arraylist.Count);
+//arraylist.AddRange(new int[] { 1, 2, 3, 4, 5 });
+//Console.WriteLine(arraylist.Capacity);
+//Console.WriteLine(arraylist.Count);
+
+//ArrayList arraylist1 = new ArrayList(5);
+
+
+//Point2D<int> point = new Point2D<int>();
+//Console.WriteLine(point);
+
+
+//Uterators uterators = new Uterators(45);
+//foreach (var item in uterators.GetNumber())
+//{
+//    Console.WriteLine(uterators);
+//}
+
+//string path = ".\\test.txt";
+//using (FileStream stream = new FileStream(path,FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.ReadWrite))
+//{
+//    string text = "text for test file";
+//    byte[] bytes = Encoding.Default.GetBytes(text);
+//    stream.Write(bytes, 0, bytes.Length);
+//}
+
+//string pathBin = ".\\test.bin";
+//FileStream file = null;
+
+//using (FileStream stream1 = new FileStream(path, FileMode.Open, FileAccess.Read))
+//{
+//    byte[] bytes = new byte[(int)stream1.Length];
+//    stream1.Read(bytes, 0, bytes.Length);
+//    Console.WriteLine(Encoding.Default.GetString(bytes));
+//}
+
+//try
+//{
+//    file = new FileStream(pathBin, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+//    string text = "text bin";
+//    byte[] bytes = Encoding.Default.GetBytes(text);
+//    file.Write(bytes, 0, bytes.Length);
+//}
+//finally
+//{
+//    if (file != null)
 //    {
-//        writer.Dispose();
-//        writer.Close();
+//        file.Flush();
+//        file.Close();
+//    }
+//}
+
+//try
+//{
+//    file = new FileStream(pathBin, FileMode.Open, FileAccess.Read);
+//    byte[] bytes = new byte[(int)file.Length];
+//    file.Read(bytes, 0, bytes.Length);
+
+//    Console.WriteLine(Encoding.Default.GetString(bytes));
+//}
+//finally
+//{
+//    if (file != null)
+//    {
+//        file.Flush();
+//        file.Close();
+//    }
+//}
+
+//string path = ".\\task1.txt";
+//using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+//{
+//    string text = "text";
+//    byte[] bytes = Encoding.Default.GetBytes(text);
+//    stream.Write(bytes, 0, bytes.Length);
+//}
+
+//using (FileStream stream = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Write))
+//{
+//    string text = "task";
+//    byte[] bytes = Encoding.Default.GetBytes(text);
+//    stream.Write(bytes, 0, bytes.Length);
+//}
+
+//using (FileStream stream1 = new FileStream(path, FileMode.Open, FileAccess.Read))
+//{
+//    byte[] bytes = new byte[(int)stream1.Length];
+//    stream1.Read(bytes, 0, (int)bytes.Length);
+//    Console.WriteLine(Encoding.Default.GetString(bytes));
+//}
+
+//using (StreamWriter stream = new StreamWriter(path,true))
+//{
+//    string str = "text one two three, {0} {1} {2}";
+//    stream.WriteLine(str,"1","2","3");
+//}
+
+//using (StreamReader reader = new StreamReader(path))
+//{
+//    Console.WriteLine(reader.ReadToEnd());
+//}
+
+//using (FileStream s = new FileStream(pathBin, FileMode.Create))
+//{
+//    using (BinaryWriter binary = new BinaryWriter(s))
+//    {
+//        string s1 = "test";
+//        int a = 23;
+//        double b = 34.5;
+
+//        binary.Write(s1);
+//        binary.Write(a);
+//        binary.Write(b);
+//    }
+//}
+
+//using (FileStream s = new FileStream(pathBin, FileMode.Open))
+//{
+//    using (BinaryReader reader = new BinaryReader(s))
+//    {
+//        Console.WriteLine(reader.ReadString());
+//        Console.WriteLine(reader.ReadInt32());
+//        Console.WriteLine(reader.ReadDouble());
 //    }
 //}
 
 
-//XmlTextWriter writer = null;
+//Directory
+//DirectoryInfo
 
-//try
+//File
+//FileInfo
+
+//string path = ".";
+//DirectoryInfo directory = new DirectoryInfo(path);
+
+//Console.WriteLine(directory.FullName);
+//Console.WriteLine(directory.CreationTime);
+
+//FileInfo[] fileInfos = directory.GetFiles();
+//foreach (FileInfo file in fileInfos)
 //{
-//    writer = new XmlTextWriter("House.xml", Encoding.Unicode);
-//    writer.Formatting = Formatting.Indented;
-
-//    writer.WriteStartDocument();
-//    writer.WriteStartElement("House");
-
-//    writer.WriteStartElement("Apartment");
-//    writer.WriteAttributeString("Number", "1");
-
-//    writer.WriteElementString("Rooms", "1");
-//    writer.WriteElementString("People", "1");
-//    writer.WriteElementString("Price", "20000");
-
-//    writer.WriteEndElement();
-
-//    writer.WriteStartElement("Apartment");
-//    writer.WriteAttributeString("Number", "2");
-
-//    writer.WriteElementString("Rooms", "2");
-//    writer.WriteElementString("People", "2");
-//    writer.WriteElementString("Price", "30000");
-
-//    writer.WriteEndElement();
-
-//    writer.WriteStartElement("Apartment");
-//    writer.WriteAttributeString("Number", "3");
-
-//    writer.WriteElementString("Rooms", "3");
-//    writer.WriteElementString("People", "3");
-//    writer.WriteElementString("Price", "40000");
-
-//    writer.WriteEndElement();
-
-//    writer.WriteEndElement();
-//    writer.WriteEndDocument();
-//}
-//catch
-//{
-
-//}
-//finally
-//{
-//    if (writer != null)
-//    {
-//        writer.Dispose();
-//        writer.Close();
-//    }
+//    Console.WriteLine(file.FullName);
+//    //Console.WriteLine(file.Name);
+//    //Console.WriteLine(file.CreationTime);
+//    //Console.WriteLine(file.DirectoryName);  
 //}
 
-XmlDocument document = new XmlDocument();
-document.Load("Cars.xml");
-//Output(document.DocumentElement);
+//if (!directory.Exists)
+//{
+//    directory.Create();
+//}
 
-XmlNode root = document.DocumentElement;
+//DirectoryInfo directoryInfo = directory.CreateSubdirectory("SubDir");
+//Console.WriteLine(directoryInfo.FullName);
 
-XmlNode bike = document.CreateElement("Motobike");
-XmlNode elem1 = document.CreateElement("Manafacture");
-XmlNode elem2 = document.CreateElement("Model");
-XmlNode elem3 = document.CreateElement("Year");
-XmlNode elem4 = document.CreateElement("Color");
-XmlNode elem5 = document.CreateElement("Speed");
 
-XmlNode text1 = document.CreateTextNode("BMW");
-XmlNode text2 = document.CreateTextNode("C12");
-XmlNode text3 = document.CreateTextNode("2003");
-XmlNode text4 = document.CreateTextNode("Green");
-XmlNode text5 = document.CreateTextNode("179");
+//string s = directory.FullName + @"\testBin{0}.bin";
+//for (int i = 0; i < 3; i++)
+//{
+//    string buff = string.Format(s, i);
+//    if (!File.Exists(buff))
+//        File.Create(buff);
+//}
 
-elem1.AppendChild(text1);
-elem2.AppendChild(text2);
-elem3.AppendChild(text3);
-elem4.AppendChild(text4);
-elem5.AppendChild(text5);
 
-bike.AppendChild(elem1);
-bike.AppendChild(elem2);
-bike.AppendChild(elem3);
-bike.AppendChild(elem4);
-bike.AppendChild(elem5);
+//string[] files = Directory.GetFiles(directory.FullName,"test*.txt");   
+//foreach (string file in files)
+//    Console.WriteLine(file);
 
-root.AppendChild(bike);
-document.Save("Cars.xml");
-Output(document.DocumentElement);
 
-Console.WriteLine("------------------------------------------------");
-XmlTextReader reader = new XmlTextReader("Cars.xml");
-reader.WhitespaceHandling = WhitespaceHandling.None;
+//DirectoryInfo projDir  = Directory.GetParent(path);
+//Console.WriteLine(projDir.Parent);
 
-while (reader.Read())
+//if(directory.Exists)
+//    directoryInfo.Delete(true);
+
+
+
+//string path = @"D:\\itstep\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0";
+//DirectoryInfo directory = new DirectoryInfo(path);
+
+//if (!directory.Exists)
+//    directory.Create();
+
+//for (int i = 0; i < 3; i++)
+//{
+//    if (!File.Exists(path + $@"\text{i}.txt"))
+//        using (FileStream fs = File.Create(path + $@"\text{i}.txt"));
+
+//    if (!File.Exists(path + $@"\bin{i}.bin"))
+//        using (FileStream fs = File.Create(path + $@"\bin{i}.bin"));
+//}
+
+
+//FileW_R fl = new FileW_R(path);
+//foreach (var i in fl.GetFilesName())
+//{
+//    fl.WriteInfoToFile(i, "info");
+//}
+
+//fl.GetInfoFromAllFiles();
+
+
+Calculator calculator = new Calculator();
+
+CalcDelegate calcDelegate = new CalcDelegate(calculator.Mult);
+calcDelegate = Calculator.Sub; //new
+calcDelegate += calculator.Add;
+calcDelegate += Calculator.Div;
+
+foreach (CalcDelegate i in calcDelegate.GetInvocationList())
 {
-    Console.WriteLine($"type: {reader.NodeType}\t Name: {reader.Name}\t Value: {reader.Value}");
-
-    if (reader.AttributeCount > 0)
-        while (reader.MoveToNextAttribute())
-            Console.WriteLine($"type: {reader.NodeType}\t Name: {reader.Name}\t Value: {reader.Value}");
+    Console.WriteLine(i);
 }
-
-void Output(XmlNode node)
-{
-    Console.WriteLine($"type: {node.NodeType}\t Name: {node.Name}\t Value: {node.Value}");
-
-    if (node.Attributes != null)
-        foreach (XmlAttribute attr in node.Attributes)
-        {
-            Console.WriteLine($"Type: {attr.NodeType}\t Name: {attr.Name}\t Value: {attr.Value}");
-        }
-
-    if (node.HasChildNodes)
-        foreach (XmlNode childNode in node.ChildNodes)
-        {
-            Output(childNode);
-        }
-}
-
-//XmlDocument document = new XmlDocument();
-//document.Load("House.xml");
-
-//XmlNode root = document.DocumentElement;
-
-//root.RemoveChild(root.FirstChild);
-//root.RemoveChild(root.FirstChild);
-
-//XmlNode newApartment1 = document.CreateElement("newApartment1");
-//XmlNode elem11 = document.CreateElement("Rooms");
-//XmlNode elem21 = document.CreateElement("People");
-//XmlNode elem31 = document.CreateElement("Price");
-
-//XmlNode text11 = document.CreateTextNode("1");
-//XmlNode text21 = document.CreateTextNode("1");
-//XmlNode text31 = document.CreateTextNode("1");
-
-//elem11.AppendChild(text11);
-//elem21.AppendChild(text21);
-//elem31.AppendChild(text31);
-
-//newApartment1.AppendChild(elem11);
-//newApartment1.AppendChild(elem21);
-//newApartment1.AppendChild(elem31);
-
-//root.AppendChild(newApartment1);
-
-//XmlNode newApartment2 = document.CreateElement("newApartment2");
-//XmlNode elem12 = document.CreateElement("Rooms");
-//XmlNode elem22 = document.CreateElement("People");
-//XmlNode elem32 = document.CreateElement("Price");
-
-//XmlNode text12 = document.CreateTextNode("2");
-//XmlNode text22 = document.CreateTextNode("2");
-//XmlNode text32 = document.CreateTextNode("2");
-
-//elem12.AppendChild(text12);
-//elem22.AppendChild(text22);
-//elem32.AppendChild(text32);
-
-//newApartment2.AppendChild(elem12);
-//newApartment2.AppendChild(elem22);
-//newApartment2.AppendChild(elem32);
-
-//root.AppendChild(newApartment2);
-
-//XmlNode newApartment3 = document.CreateElement("newApartment3");
-//XmlNode elem13 = document.CreateElement("Rooms");
-//XmlNode elem23 = document.CreateElement("People");
-//XmlNode elem33 = document.CreateElement("Price");
-
-//XmlNode text13 = document.CreateTextNode("3");
-//XmlNode text23 = document.CreateTextNode("3");
-//XmlNode text33 = document.CreateTextNode("3");
-
-//elem13.AppendChild(text13);
-//elem23.AppendChild(text23);
-//elem33.AppendChild(text33);
-
-//newApartment3.AppendChild(elem13);
-//newApartment3.AppendChild(elem23);
-//newApartment3.AppendChild(elem33);
-
-//root.AppendChild(newApartment3);
-//document.Save("House.xml");
-
-//Console.WriteLine("------------------------------------------------");
-//XmlTextReader reader = new XmlTextReader("House.xml");
-//reader.WhitespaceHandling = WhitespaceHandling.None;
-
-//while (reader.Read())
-//{
-//    Console.WriteLine($"type: {reader.NodeType}\t Name: {reader.Name}\t Value: {reader.Value}");
-
-//    if (reader.AttributeCount > 0)
-//        while (reader.MoveToNextAttribute())
-//            Console.WriteLine($"type: {reader.NodeType}\t Name: {reader.Name}\t Value: {reader.Value}");
-//}

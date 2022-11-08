@@ -1,25 +1,31 @@
-﻿namespace ConsoleApp2;
+﻿namespace ConsoleApp1;
 
-[Serializable]
 public class Animal
 {
-    [NonSerialized]
-    private int id;
-
     public string Name { get; set; }
-
     public int Age { get; set; }
+    public string Country { get; set; }
+    public Type type { get; set; }
 
-    public List<string> Food { get; set; }
-
-
-    public Animal(int id)
+    public Animal() : this("Animal", 0, "", Type.None) { }
+    public Animal(string name, int age, string country, Type type)
     {
-        this.id = id;
-    }
+        this.Name = name;
+        this.Age = age;
+        this.Country = country;
+        this.type = type;
+    }   
 
-    public override string ToString()
+    public void Show()
     {
-        return $"{id}\t {Name}\t {Age}\t {Food}";
+        Console.WriteLine($"name {Name}, age {Age}, country {Country}, type {type}");
     }
+}
+
+public enum Type
+{
+    None,
+    Cat,
+    Dog,
+    Rat
 }

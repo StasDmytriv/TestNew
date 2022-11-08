@@ -1,34 +1,37 @@
-﻿namespace ConsoleApp2;
+﻿namespace ConsoleApp1;
 
-public delegate void ExamDelegate(string task);
+public class Student : IComparable
+{ 
+    public string FirstName { get; set; }
 
-[Coder]
+    public string LastName { get; set; }
 
-public sealed class Student
-{
-    public int Id { get; set; }
+    public DateTime DateTime { get; set; }
 
-    public string Name { get; set; }
-
-    public int Age { get; set; }
+    public StudentCard StudentCard { get; set; }
 
 
-    [Coder("Constructor")]
-
-    public Student()
+    public int CompareTo(object? obj)
     {
-        Id = 0;
-        Name = string.Empty;
-        Age = 0;
-    }
-
-    public void ExamStudent(string task)
-    {
-        Console.WriteLine($"Student {Name} solved the {task}");
+        return LastName.CompareTo(((Student)obj).LastName);
     }
 
     public override string ToString()
     {
-        return $"{Id} {Name}";
+        return $"{FirstName}\t{LastName}\t{DateTime.ToShortDateString()}\t{StudentCard}"; 
     }
+
+    public object Clone()
+    {
+        Student clone = this.MemberwiseClone() as Student;
+        clone.StudentCard= this.StudentCard.Clone() as StudentCard;
+        //clone.StudentCard = new StudentCard
+        //{
+        //    Number = this.StudentCard.Number,
+        //    Seria = this.StudentCard.Seria
+        //};
+        return clone;
+    }
+
+
 }
